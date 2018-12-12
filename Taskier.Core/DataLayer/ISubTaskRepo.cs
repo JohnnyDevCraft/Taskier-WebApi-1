@@ -13,7 +13,7 @@ namespace Taskier.Core.DataLayer
         Task<IList<SubTaskSm>> GetAllSubTasksForTask(int taskId, int page, int count, string orderBy, bool desc);
         Task<IList<SubTaskSm>> GetActiveSubTasksForTask(int taskId, int page, int count, string orderBy, bool desc);
         Task<SubTaskSm> UpdateSubTask(SubTaskSm task);
-        Task<bool> PatchSubTask(int id, string prop, object value);
-        Task<bool> DeleteSubTask(int Id);
+        Task PatchSubTask(int id, string prop, object value);
+        Task DeleteSubTask(int Id);
     }
 }

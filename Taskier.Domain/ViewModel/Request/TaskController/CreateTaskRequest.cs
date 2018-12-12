@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-
-namespace Taskier.Domain.ServiceModel
+namespace Taskier.Domain.ViewModel.Request.TaskController
 {
-    public class TaskSm
+    public class CreateTaskRequest
     {
-        public int Id { get; set; }
         public string Subject { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string AssignedTo { get; set; }
-        public bool Completed { get; set; }
-
-        public IList<SubTaskSm> SubTasks { get; set; }
     }
 }

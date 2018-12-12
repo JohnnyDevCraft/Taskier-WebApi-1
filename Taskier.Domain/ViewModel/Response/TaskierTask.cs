@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Taskier.Domain.ServiceModel
+namespace Taskier.Domain.ViewModel.Response
 {
-    public class TaskSm
+    public class TaskierTask
     {
         public int Id { get; set; }
         public string Subject { get; set; }
@@ -13,6 +13,6 @@ namespace Taskier.Domain.ServiceModel
         public string AssignedTo { get; set; }
         public bool Completed { get; set; }
 
-        public IList<SubTaskSm> SubTasks { get; set; }
+        public IList<TaskierSubTask> SubTasks { get; set; }
     }
 }

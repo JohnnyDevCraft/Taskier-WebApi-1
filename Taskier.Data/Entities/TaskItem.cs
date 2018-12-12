@@ -11,6 +11,7 @@ namespace Taskier.Data.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string AssignedTo { get; set; }
+        public bool Completed { get; set; }
         public IList<SubTaskItem> SubTasks { get; set; }
     }
 }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="DataLayer\" />
+    <Folder Include="ServiceLayer\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Taskier.Domain\Taskier.Domain.csproj" />

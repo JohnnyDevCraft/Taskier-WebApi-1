@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskier.Domain", "Taskier.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskier.Data", "Taskier.Data\Taskier.Data.csproj", "{3625CACC-4C45-4B50-B3C4-4AE0F313014F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskier.Services", "Taskier.Services\Taskier.Services.csproj", "{4DE27169-BC25-4B06-86E9-0A575FF7CF6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskier.Api", "Taskier.Api\Taskier.Api.csproj", "{70BD1F4A-5D72-4CEE-8991-3E9832CD060A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,5 +29,13 @@ Global
 		{3625CACC-4C45-4B50-B3C4-4AE0F313014F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3625CACC-4C45-4B50-B3C4-4AE0F313014F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3625CACC-4C45-4B50-B3C4-4AE0F313014F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE27169-BC25-4B06-86E9-0A575FF7CF6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE27169-BC25-4B06-86E9-0A575FF7CF6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE27169-BC25-4B06-86E9-0A575FF7CF6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE27169-BC25-4B06-86E9-0A575FF7CF6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70BD1F4A-5D72-4CEE-8991-3E9832CD060A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70BD1F4A-5D72-4CEE-8991-3E9832CD060A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70BD1F4A-5D72-4CEE-8991-3E9832CD060A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70BD1F4A-5D72-4CEE-8991-3E9832CD060A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

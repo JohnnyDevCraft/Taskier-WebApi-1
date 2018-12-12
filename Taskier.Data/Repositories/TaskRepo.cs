@@ -22,22 +22,30 @@ namespace Taskier.Data.Repositories
             this.mapper = mapper;
         }
 
-        public async Task DeleteTask(int id)
+        public async Task<TaskSm> CreateTaskAsync(TaskSm task)
+        {
+            var entity = mapper.Map<TaskItem>(task);
+            await db.TaskItems.AddAsync(entity);
+            await db.SaveChangesAsync();
+            return mapper.Map<TaskSm>(entity);
+        }
+
+        public async Task DeleteTaskAsync(int id)
         {
             var task = await db.TaskItems.FindAsync(id);
             db.TaskItems.Remove(task);
             await db.SaveChangesAsync();
         }
 
-        public async Task<TaskSm> FindTask(int id)
+        public async Task<TaskSm> FindTaskAsync(int id)
         {
             var item =  await db.TaskItems.FindAsync(id);
             return mapper.Map<TaskSm>(item);
         }
 
-        public async Task<IList<TaskSm>> GetActiveTasksForUser(string user, int page, int count, string orderBy, bool desc)
+        public async Task<IList<TaskSm>> GetActiveTasksForUserAsync(string user, int page, int count, string orderBy, bool desc)
         {
-            var items = db.TaskItems.Where(item => item.AssignedTo == user && item.EndDate > DateTime.Now);
+            var items = db.TaskItems.Where(item => item.AssignedTo == user && !item.Completed);
 
             if (!string.IsNullOrWhiteSpace(orderBy))
             {
@@ -54,7 +62,7 @@ namespace Taskier.Data.Repositories
             return records.Select((arg) => mapper.Map<TaskSm>(arg)).ToList();
         }
 
-        public async Task<IList<TaskSm>> GetAllTasksForUser(string user, int page, int count, string orderBy, bool desc)
+        public async Task<IList<TaskSm>> GetAllTasksForUserAsync(string user, int page, int count, string orderBy, bool desc)
         {
             var items = db.TaskItems.Where(item => item.AssignedTo == user);
 
@@ -73,7 +81,7 @@ namespace Taskier.Data.Repositories
             return records.Select((arg) => mapper.Map<TaskSm>(arg)).ToList();
         }
 
-        public async Task PatchTask(int id, string prop, object value)
+        public async Task PatchTaskAsync(int id, string prop, object value)
         {
             var task = await db.TaskItems.FindAsync(id);
             task.GetType().GetProperty(prop).SetValue(task, value);
@@ -81,7 +89,7 @@ namespace Taskier.Data.Repositories
             await db.SaveChangesAsync();
         }
 
-        public async Task<TaskSm> UpdateTask(TaskSm task)
+        public async Task<TaskSm> UpdateTaskAsync(TaskSm task)
         {
             var entry = db.Attach(mapper.Map<TaskItem>(task));
             entry.State = EntityState.Modified;

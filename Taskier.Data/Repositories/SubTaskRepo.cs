@@ -22,20 +22,28 @@ namespace Taskier.Data.Repositories
             this.db = db;
         }
 
-        public async Task DeleteSubTask(int Id)
+        public async Task<SubTaskSm> CreateSubTaskAsync(SubTaskSm task)
+        {
+            var entity = mapper.Map<SubTaskItem>(task);
+            await db.SubTaskItems.AddAsync(entity);
+            await db.SaveChangesAsync();
+            return mapper.Map<SubTaskSm>(entity);
+        }
+
+        public async Task DeleteSubTaskAsync(int Id)
         {
             var item = await db.SubTaskItems.FindAsync(Id);
             db.SubTaskItems.Remove(item);
             await db.SaveChangesAsync();
         }
 
-        public async Task<SubTaskSm> FindSubTask(int id)
+        public async Task<SubTaskSm> FindSubTaskAsync(int id)
         {
             var entity = await db.SubTaskItems.FindAsync(id);
             return mapper.Map<SubTaskSm>(entity);
         }
 
-        public async Task<IList<SubTaskSm>> GetActiveSubTasksForTask(int taskId, int page, int count, string orderBy, bool desc)
+        public async Task<IList<SubTaskSm>> GetActiveSubTasksForTaskAsync(int taskId, int page, int count, string orderBy, bool desc)
         {
             var query = db.SubTaskItems.Where(item => item.TaskItemId == taskId && !item.Complete);
 
@@ -54,7 +62,7 @@ namespace Taskier.Data.Repositories
             return entities.Select((arg) => mapper.Map<SubTaskSm>(arg)).ToList();
         }
 
-        public async Task<IList<SubTaskSm>> GetActiveSubTasksForUser(string user, int page, int count, string orderBy, bool desc)
+        public async Task<IList<SubTaskSm>> GetActiveSubTasksForUserAsync(string user, int page, int count, string orderBy, bool desc)
         {
             var query = db.SubTaskItems.Where(item => item.AssignedTo == user && !item.Complete);
 
@@ -73,7 +81,7 @@ namespace Taskier.Data.Repositories
             return entities.Select((arg) => mapper.Map<SubTaskSm>(arg)).ToList();
         }
 
-        public async Task<IList<SubTaskSm>> GetAllSubTasksForTask(int taskId, int page, int count, string orderBy, bool desc)
+        public async Task<IList<SubTaskSm>> GetAllSubTasksForTaskAsync(int taskId, int page, int count, string orderBy, bool desc)
         {
             var query = db.SubTaskItems.Where(item => item.TaskItemId == taskId);
 
@@ -92,9 +100,9 @@ namespace Taskier.Data.Repositories
             return entities.Select((arg) => mapper.Map<SubTaskSm>(arg)).ToList();
         }
 
-        public async Task<IList<SubTaskSm>> GetAllSubTasksForUser(string user, int page, int count, string orderBy, bool desc)
+        public async Task<IList<SubTaskSm>> GetAllSubTasksForUserAsync(string user, int page, int count, string orderBy, bool desc)
         {
-            var query = db.SubTaskItems.Where(item => item.TaskItemId == taskId && !item.Complete);
+            var query = db.SubTaskItems.Where(item => item.AssignedTo == user && !item.Complete);
 
             if (!string.IsNullOrWhiteSpace(orderBy))
             {
@@ -111,7 +119,7 @@ namespace Taskier.Data.Repositories
             return entities.Select((arg) => mapper.Map<SubTaskSm>(arg)).ToList();
         }
 
-        public async Task PatchSubTask(int id, string prop, object value)
+        public async Task PatchSubTaskAsync(int id, string prop, object value)
         {
             var entity = await db.SubTaskItems.FindAsync(id);
             entity.GetType().GetProperty(prop).SetValue(entity, value);
@@ -119,7 +127,7 @@ namespace Taskier.Data.Repositories
             await db.SaveChangesAsync();
         }
 
-        public async Task<SubTaskSm> UpdateSubTask(SubTaskSm task)
+        public async Task<SubTaskSm> UpdateSubTaskAsync(SubTaskSm task)
         {
             if (db.SubTaskItems.Any(item => item.Id == task.Id))
             {

@@ -16,6 +16,7 @@ namespace Taskier.Data.Configure
                 .ForMember(dest => dest.EndDate, opt => opt.MapFrom((src) => src.EndDate))
                 .ForMember(dest => dest.StartDate, opt => opt.MapFrom((src) => src.StartDate))
                 .ForMember(dest => dest.Subject, opt => opt.MapFrom((src) => src.Subject))
+                .ForMember(dest => dest.Completed, opt => opt.MapFrom((src)=> src.Completed))
                 .ForAllOtherMembers((obj) => obj.Ignore());
 
             CreateMap<TaskItem, TaskSm>()
@@ -25,6 +26,7 @@ namespace Taskier.Data.Configure
                 .ForMember(dest => dest.EndDate, opt => opt.MapFrom((src) => src.EndDate))
                 .ForMember(dest => dest.StartDate, opt => opt.MapFrom((src) => src.StartDate))
                 .ForMember(dest => dest.Subject, opt => opt.MapFrom((src) => src.Subject))
+                .ForMember(dest => dest.Completed, opt => opt.MapFrom((src) => src.Completed))
                 .ForAllOtherMembers((obj) => obj.Ignore());
 
             CreateMap<SubTaskSm, SubTaskItem>()

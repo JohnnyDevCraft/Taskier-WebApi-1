@@ -29,7 +29,7 @@ namespace Taskier.Api
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -41,14 +41,14 @@ namespace Taskier.Api
                 mc.AddProfile(new Services.Configuration.MappingProfile());
             });
 
-            IMapper mapper = mappingConfig.CreateMapper();
+            var mapper = mappingConfig.CreateMapper();
 
             services.AddSingleton(mapper);
 
             services.AddMvc().AddFluentValidation().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<TaskierContext>((obj) =>
             {
-                obj.UseSqlServer(Configuration.GetConnectionString("DefautConnection"), opt => opt.MigrationsAssembly("Taskier.Data"));
+                obj.UseSqlServer(Configuration.GetConnectionString("Default"), opt => opt.MigrationsAssembly("Taskier.Data"));
             });
 
             //Validators

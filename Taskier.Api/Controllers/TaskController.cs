@@ -13,22 +13,22 @@ namespace Taskier.Api.Controllers
     [Route("api/[controller]")]
     public class TaskController : Controller
     {
-        private readonly IServiceFactory serviceFactory;
-        private readonly ITaskService taskService;
+        private readonly IServiceFactory _serviceFactory;
+        private readonly ITaskService _taskService;
 
         public TaskController(IServiceFactory serviceFactory)
         {
-            this.serviceFactory = serviceFactory;
-            this.taskService = serviceFactory.GetTaskService();
+            this._serviceFactory = serviceFactory;
+            this._taskService = serviceFactory.GetTaskService();
         }
 
 
         // GET: api/tasks
         [HttpGet("/api/tasks/all")]
-        public async Task<IActionResult> Get([FromQuery]int page =0, [FromQuery]int count = 0, [FromQuery]string orderBy = "", [FromQuery]bool desc = true)
+        public async Task<IActionResult> Get([FromQuery]int page = 0, [FromQuery]int count = 0, [FromQuery]string orderBy = "", [FromQuery]bool desc = true)
         {
             if (page > 0 && count < 1) return BadRequest("Count must be higher than 0 when using paged results.");
-            return Ok(await taskService.GetAllTasksForUserAsync(User.Identity.Name, page, count, orderBy, desc));
+            return Ok(await _taskService.GetAllTasksForUserAsync(User.Identity.Name, page, count, orderBy, desc));
         }
 
         // GET api/task/5
@@ -36,7 +36,7 @@ namespace Taskier.Api.Controllers
         public async Task<IActionResult> Get([FromRoute]int id)
         {
             if (id < 1) return BadRequest("id must be greater than 0.");
-            return Ok(await taskService.FindTaskAsync(id));
+            return Ok(await _taskService.FindTaskAsync(id));
         }
 
         // POST api/task
@@ -44,7 +44,7 @@ namespace Taskier.Api.Controllers
         public async Task<IActionResult> Post([FromBody]CreateTaskRequest model)
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
-            var result = await taskService.CreateTaskAsync(model);
+            var result = await _taskService.CreateTaskAsync(model);
             return Created($"/api/task/{result.Id}", result);
         }
 

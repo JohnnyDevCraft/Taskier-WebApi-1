@@ -96,5 +96,10 @@ namespace Taskier.Data.Repositories
             await db.SaveChangesAsync();
             return mapper.Map<TaskSm>(entry.Entity);
         }
+
+        private async Task<IEnumerable<T>> GetAsync<T>(Func<IQueryable<T>, IQueryable<T>> queryLogic, IQueryable<T> dbSet)
+        {
+            return await queryLogic(dbSet).ToListAsync();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Taskier.Data.Entities;
 
@@ -9,8 +10,9 @@ namespace Taskier.Data
         public DbSet<TaskItem> TaskItems { get; set; }
         public DbSet<SubTaskItem> SubTaskItems { get; set; }
 
-        public TaskierContext()
+        public TaskierContext(DbContextOptions<TaskierContext> options): base(options)
         {
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

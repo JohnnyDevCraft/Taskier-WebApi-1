@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskier.Services", "Taskier
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskier.Api", "Taskier.Api\Taskier.Api.csproj", "{70BD1F4A-5D72-4CEE-8991-3E9832CD060A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{EB335AD3-70C0-4B73-A0B4-85007D8B1470}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskier.Domain.Tests", "Taskier.Domain.Tests\Taskier.Domain.Tests.csproj", "{5CE0D46E-3F9F-4575-AB2B-EADD96B59E37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,5 +41,12 @@ Global
 		{70BD1F4A-5D72-4CEE-8991-3E9832CD060A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70BD1F4A-5D72-4CEE-8991-3E9832CD060A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70BD1F4A-5D72-4CEE-8991-3E9832CD060A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CE0D46E-3F9F-4575-AB2B-EADD96B59E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CE0D46E-3F9F-4575-AB2B-EADD96B59E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CE0D46E-3F9F-4575-AB2B-EADD96B59E37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CE0D46E-3F9F-4575-AB2B-EADD96B59E37}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5CE0D46E-3F9F-4575-AB2B-EADD96B59E37} = {EB335AD3-70C0-4B73-A0B4-85007D8B1470}
 	EndGlobalSection
 EndGlobal

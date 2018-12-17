@@ -29,9 +29,9 @@ namespace Taskier.Services
             return mapper.Map<TaskierTask>(result);
         }
 
-        public Task DeleteTaskAsync(int Id)
+        public async Task DeleteTaskAsync(int Id)
         {
-            throw new NotImplementedException();
+            await taskRepo.DeleteTaskAsync(Id);
         }
 
         public async Task<TaskierTask> FindTaskAsync(int id)
@@ -40,9 +40,10 @@ namespace Taskier.Services
             return mapper.Map<TaskierTask>(result);
         }
 
-        public Task<IList<TaskierTask>> GetActiveTasksForUserAsync(string user, int page, int count, string orderBy, bool desc)
+        public async Task<IList<TaskierTask>> GetActiveTasksForUserAsync(string user, int page, int count, string orderBy, bool desc)
         {
-            throw new NotImplementedException();
+            var result = await taskRepo.GetActiveTasksForUserAsync(user, page, count, orderBy, desc);
+            return result.Select(x => mapper.Map<TaskierTask>(x)).ToList();
         }
 
         public async Task<IList<TaskierTask>> GetAllTasksForUserAsync(string user, int page, int count, string orderBy, bool desc)
@@ -51,14 +52,15 @@ namespace Taskier.Services
             return result.Select(x => mapper.Map<TaskierTask>(x)).ToList();
         }
 
-        public Task PatchTaskAsync(int id, string prop, object value)
+        public async Task PatchTaskAsync(int id, string prop, object value)
         {
-            throw new NotImplementedException();
+            await taskRepo.PatchTaskAsync(id, prop, value);
         }
 
-        public Task<TaskierTask> UpdateTaskAsync(TaskierTask task)
+        public async Task<TaskierTask> UpdateTaskAsync(TaskierTask task)
         {
-            throw new NotImplementedException();
+            var result = await taskRepo.UpdateTaskAsync(mapper.Map<TaskSm>(task));
+            return mapper.Map<TaskierTask>(result);
         }
     }
 }
